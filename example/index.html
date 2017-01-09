@@ -71,6 +71,9 @@
             padding:10px;
             background:#fff;
         }
+        .sticky {
+            will-change: transform;
+        }
         .is--stuck {
             position:fixed;
             top:0px;
@@ -86,7 +89,7 @@
     <div class="container">
         <h1>Sticky</h1>
         <div style="height:200px; background:#ddd"></div>
-        <nav class="js-sticky">
+        <nav class="js-sticky sticky">
             <a href="#section1">Section 1</a>
             <a href="#section2">Section 2</a>
             <a href="#section3">Section 3</a>
