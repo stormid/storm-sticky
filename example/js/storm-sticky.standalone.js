@@ -1,6 +1,6 @@
 /**
  * @name storm-sticky: 
- * @version 0.1.0: Mon, 09 Jan 2017 15:42:13 GMT
+ * @version 0.1.0: Mon, 09 Jan 2017 17:19:45 GMT
  * @author stormid
  * @license MIT
  */
@@ -33,6 +33,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var defaults = {
 	offset: 0,
 	callback: null,
+	unload: true,
 	throttle: 16,
 	className: 'is--stuck'
 },
@@ -49,12 +50,14 @@ var defaults = {
 		document.addEventListener('resize', this.throttled);
 		document.addEventListener('resize', this.getTriggerOffset.bind(this));
 		this.check();
+
+		return this;
 	},
 	getTriggerOffset: function getTriggerOffset() {
 		var cachedDisplayStyle = this.DOMElement.style.position;
 
 		this.DOMElement.style.position = 'static';
-		this.triggerOffset = this.DOMElement.getBoundingClientRect().top + document.body.scrollTop + this.settings.offset;
+		this.triggerOffset = this.DOMElement.getBoundingClientRect().top + (document.body.scrollTop || ~~document.body.scrollTop) + this.settings.offset;
 		this.DOMElement.style.position = cachedDisplayStyle;
 	},
 	check: function check() {

@@ -22,7 +22,7 @@
   "scripts": {
     "build": "gulp build",
     "start": "gulp",
-    "test": "istanbul cover _mocha --report lcovonly -- -R spec && codecov",
+    "test": "istanbul cover _mocha -- -R spec && codecov",
     "test:watch": "NODE_ENV=test mocha --watch"
   },
   "devDependencies": {
