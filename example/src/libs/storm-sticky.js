@@ -1,6 +1,6 @@
 /**
  * @name storm-sticky: 
- * @version 0.1.0: Mon, 09 Jan 2017 17:28:09 GMT
+ * @version 0.1.0: Wed, 11 Jan 2017 13:24:32 GMT
  * @author stormid
  * @license MIT
  */
@@ -8,7 +8,7 @@ import throttle from 'lodash/throttle';
 
 const defaults = {
 		offset: 0,
-		callback: null,
+		callback: false,
 		unload: true,
 		throttle: 16,
 		className: 'is--stuck'
@@ -35,16 +35,16 @@ const defaults = {
 			this.DOMElement.style.position = cachedDisplayStyle;
 		},
 		check(){
-			if (this.shouldStick()) {
-				this.DOMElement.classList.add(this.settings.className);
-				this.settings.callback && this.settings.callback.call(this);
-				
-				if(this.settings.unload) {
-					document.removeEventListener('scroll', this.throttled, true);
-					document.addEventListener('resize', this.throttled, true);
-				}
-			} else {
+			if (!this.shouldStick()) {
 				this.DOMElement.classList.contains(this.settings.className) && this.DOMElement.classList.remove(this.settings.className);
+				return;
+			}
+			this.DOMElement.classList.add(this.settings.className);
+			this.settings.callback && this.settings.callback.call(this);
+			
+			if(this.settings.unload) {
+				document.removeEventListener('scroll', this.throttled, true);
+				document.removeEventListener('resize', this.throttled, true);
 			}
 		},
 		shouldStick(){
