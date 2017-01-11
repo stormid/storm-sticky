@@ -1,6 +1,6 @@
 /**
  * @name storm-sticky: 
- * @version 0.1.0: Mon, 09 Jan 2017 17:19:45 GMT
+ * @version 0.1.0: Wed, 11 Jan 2017 13:21:26 GMT
  * @author stormid
  * @license MIT
  */
@@ -32,7 +32,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var defaults = {
 	offset: 0,
-	callback: null,
+	callback: false,
 	unload: true,
 	throttle: 16,
 	className: 'is--stuck'
@@ -61,16 +61,16 @@ var defaults = {
 		this.DOMElement.style.position = cachedDisplayStyle;
 	},
 	check: function check() {
-		if (this.shouldStick()) {
-			this.DOMElement.classList.add(this.settings.className);
-			this.settings.callback && this.settings.callback.call(this);
-
-			if (this.settings.unload) {
-				document.removeEventListener('scroll', this.throttled, true);
-				document.addEventListener('resize', this.throttled, true);
-			}
-		} else {
+		if (!this.shouldStick()) {
 			this.DOMElement.classList.contains(this.settings.className) && this.DOMElement.classList.remove(this.settings.className);
+			return;
+		}
+		this.DOMElement.classList.add(this.settings.className);
+		this.settings.callback && this.settings.callback.call(this);
+
+		if (this.settings.unload) {
+			document.removeEventListener('scroll', this.throttled, true);
+			document.removeEventListener('resize', this.throttled, true);
 		}
 	},
 	shouldStick: function shouldStick() {
