@@ -1,6 +1,6 @@
 /**
  * @name storm-sticky: 
- * @version 0.1.0: Wed, 11 Jan 2017 13:24:32 GMT
+ * @version 0.1.0: Fri, 20 Jan 2017 16:50:22 GMT
  * @author stormid
  * @license MIT
  */
