@@ -1,10 +1,10 @@
 /**
  * @name storm-sticky: 
- * @version 0.1.0: Fri, 20 Jan 2017 16:50:12 GMT
+ * @version 0.1.0: Tue, 31 Jan 2017 18:09:29 GMT
  * @author stormid
  * @license MIT
  */
-import throttle from 'lodash/throttle';
+import throttle from 'lodash.throttle';
 
 const defaults = {
 		offset: 0,

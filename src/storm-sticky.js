@@ -1,4 +1,4 @@
-import throttle from 'lodash/throttle';
+import throttle from 'lodash.throttle';
 
 const defaults = {
 		offset: 0,

@@ -1,8 +1,11 @@
-import Sticky from './libs/storm-sticky';
+import Load from 'storm-load';
 
 const onDOMContentLoadedTasks = [() => {
-	let sticky = Sticky.init('.js-sticky');
-	console.log(sticky);
+
+	Load('./js/storm-sticky.standalone.js')
+		.then(() => {
+			StormSticky.init('.js-sticky');
+		});
 }];
     
 if('addEventListener' in window) window.addEventListener('DOMContentLoaded', () => { onDOMContentLoadedTasks.forEach((fn) => fn()); });
