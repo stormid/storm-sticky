@@ -1,7 +1,7 @@
 {
   "name": "storm-sticky",
   "version": "0.1.0",
-  "description": "",
+  "description": "Sticky DOM elements",
   "author": "stormid",
   "license": "MIT",
   "repository": {
