@@ -1,6 +1,6 @@
 /**
- * @name storm-sticky: 
- * @version 0.1.0: Fri, 10 Feb 2017 17:44:22 GMT
+ * @name storm-sticky: Sticky DOM elements
+ * @version 0.1.0: Fri, 10 Mar 2017 18:07:42 GMT
  * @author stormid
  * @license MIT
  */
