@@ -1,4 +1,4 @@
-#Storm Sticky
+# Storm Sticky
 
 [![Build Status](https://travis-ci.org/mjbp/storm-sticky.svg?branch=master)](https://travis-ci.org/mjbp/storm-sticky)
 [![codecov.io](http://codecov.io/github/mjbp/storm-sticky/coverage.svg?branch=master)](http://codecov.io/github/mjbp/storm-sticky?branch=master)
@@ -6,10 +6,10 @@
 
 Sticky DOM elements - use with restraint and care to avoid jank.
 
-##Example
+## Example
 [https://mjbp.github.io/storm-sticky](https://mjbp.github.io/storm-sticky)
 
-##Usage
+## Usage
 ```
 npm i -S storm-sticky
 ```
@@ -29,14 +29,14 @@ Load('/content/js/async/storm-sticky.standalone.js')
     });
 ```
 
-##Options
+## Options
 ```
-    {
-        offset: 0,
-        callback: null,
-        throttle: 16,
-        className: 'is--stuck'
-    }
+{
+    offset: 0,
+    callback: null,
+    throttle: 16,
+    className: 'is--stuck'
+}
 ```
 e.g.
 ```
@@ -45,21 +45,21 @@ Sticky.init('.js-sticky', {
 });
 ```
 
-##Tests
+## Tests
 ```
 npm run test
 ```
 
-##Browser support
+## Browser support
 This is module has both es6 and es5 distributions. The es6 version should be used in a workflow that transpiles.
 
 This module depends upon Object.assign, element.classList, and Promises, available in all evergreen browsers. ie9+ is supported with polyfills, ie8+ will work with even more polyfills for Array functions and eventListeners.
 
-##Dependencies
+## Dependencies
 None external.
 
 Imports lodash.throttle.
 
 
-##License
+## License
 MIT
