@@ -109,7 +109,16 @@
         <pre class="language-markup"><code>$ npm i -S storm-sticky</code></pre>
         <h2>Usage</h2>
         <h3>HTML</h3>
-        <pre><code class="language-html"><script type="prism-html-markup"><div class="js-sticky">...</div></script></code></pre>
+        <pre><code class="language-html"><script type="prism-html-markup"><div class="js-sticky sticky">...</div></script></code></pre>
+        <h3>CSS</h3>
+        <p>Sample minimum CSS required</p>
+        <pre><code class="language-css"><script type="prism-html-markup">.sticky {
+    will-change: transform;
+}
+.is--stuck {
+    position:fixed;
+    top:0px;
+}</script></code></pre>
         <h3>JS</h3>
         <p>Either import and initialise using a named import:</p>
         <pre><code class="language-js">import Sticky from 'storm-sticky';
