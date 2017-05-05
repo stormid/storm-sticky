@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/mjbp/storm-sticky/issues"
   },
-  "main": "dist/storm-sticky.js",
+  "main": "dist/index.js",
   "keywords": [
     "stormid",
     "ui",
@@ -65,10 +65,10 @@
     "run-sequence": "^1.1.0",
     "should": "^11.1.1",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "storm-load": "^0.4.2"
   },
   "dependencies": {
-    "lodash.throttle": "^4.1.1",
-    "storm-load": "^0.4.2"
+    "lodash.throttle": "^4.1.1"
   }
 }
