@@ -1,5 +1,5 @@
 import should from 'should';
-import Sticky from '../dist/storm-sticky';
+import Sticky from '../dist/storm-sticky.standalone';
 import 'jsdom-global/register';
 
 

@@ -1,6 +1,6 @@
 /**
  * @name storm-sticky: Sticky DOM elements
- * @version 0.1.0: Fri, 17 Mar 2017 15:54:40 GMT
+ * @version 1.0.1: Fri, 05 May 2017 16:43:48 GMT
  * @author stormid
  * @license MIT
  */
@@ -25,6 +25,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var defaults = {
+  offset: 0,
+  callback: false,
+  unload: true,
+  throttle: 16,
+  className: 'is--stuck'
+};
 
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -462,21 +470,14 @@ function toNumber(value) {
   return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
 }
 
-var index = throttle;
+var index$1 = throttle;
 
-var defaults = {
-  offset: 0,
-  callback: false,
-  unload: true,
-  throttle: 16,
-  className: 'is--stuck'
-};
-var StormSticky = {
+var componentPrototype = {
   init: function init() {
     var _this = this;
 
     this.getTriggerOffset();
-    this.throttled = index(function () {
+    this.throttled = index$1(function () {
       _this.check.call(_this);
     }, this.settings.throttle);
 
@@ -518,14 +519,14 @@ var init = function init(sel, opts) {
   if (!els.length) throw new Error('Sticky cannot be initialised, no augmentable elements found');
 
   return els.map(function (el) {
-    return Object.assign(Object.create(StormSticky), {
+    return Object.assign(Object.create(componentPrototype), {
       DOMElement: el,
       settings: Object.assign({}, defaults, opts)
     }).init();
   });
 };
 
-var stormSticky = { init: init };
+var index = { init: init };
 
-exports.default = stormSticky;;
+exports.default = index;;
 }));
