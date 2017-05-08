@@ -3,9 +3,7 @@ import throttle from 'lodash.throttle';
 export default {
     init() {
         this.getTriggerOffset();
-        this.throttled = throttle(() => {
-            this.check.call(this);
-        }, this.settings.throttle);
+        this.throttled = throttle(this.check.bind(this), this.settings.throttle);
         
         document.addEventListener('scroll', this.throttled);
         document.addEventListener('resize', this.throttled);

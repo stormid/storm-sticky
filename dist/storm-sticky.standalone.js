@@ -1,6 +1,6 @@
 /**
  * @name storm-sticky: Sticky DOM elements
- * @version 1.0.1: Fri, 05 May 2017 16:43:48 GMT
+ * @version 1.1.1: Mon, 08 May 2017 13:03:07 GMT
  * @author stormid
  * @license MIT
  */
@@ -474,12 +474,8 @@ var index$1 = throttle;
 
 var componentPrototype = {
   init: function init() {
-    var _this = this;
-
     this.getTriggerOffset();
-    this.throttled = index$1(function () {
-      _this.check.call(_this);
-    }, this.settings.throttle);
+    this.throttled = index$1(this.check.bind(this), this.settings.throttle);
 
     document.addEventListener('scroll', this.throttled);
     document.addEventListener('resize', this.throttled);
