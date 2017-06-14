@@ -6,8 +6,8 @@ export default {
         this.throttled = throttle(this.check.bind(this), this.settings.throttle);
         
         document.addEventListener('scroll', this.throttled);
-        document.addEventListener('resize', this.throttled);
-        document.addEventListener('resize', this.getTriggerOffset.bind(this));
+        window.addEventListener('resize', this.throttled);
+        window.addEventListener('resize', this.getTriggerOffset.bind(this));
         this.check();
 
         return this;
@@ -29,7 +29,7 @@ export default {
         
         if(this.settings.unload) {
             document.removeEventListener('scroll', this.throttled, true);
-            document.removeEventListener('resize', this.throttled, true);
+            window.removeEventListener('resize', this.throttled, true);
         }
     },
     shouldStick(){

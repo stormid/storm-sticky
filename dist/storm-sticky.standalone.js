@@ -1,6 +1,6 @@
 /**
  * @name storm-sticky: Sticky DOM elements
- * @version 1.1.1: Mon, 08 May 2017 13:03:07 GMT
+ * @version 1.1.2: Wed, 14 Jun 2017 09:53:46 GMT
  * @author stormid
  * @license MIT
  */
@@ -478,8 +478,8 @@ var componentPrototype = {
     this.throttled = index$1(this.check.bind(this), this.settings.throttle);
 
     document.addEventListener('scroll', this.throttled);
-    document.addEventListener('resize', this.throttled);
-    document.addEventListener('resize', this.getTriggerOffset.bind(this));
+    window.addEventListener('resize', this.throttled);
+    window.addEventListener('resize', this.getTriggerOffset.bind(this));
     this.check();
 
     return this;
@@ -501,7 +501,7 @@ var componentPrototype = {
 
     if (this.settings.unload) {
       document.removeEventListener('scroll', this.throttled, true);
-      document.removeEventListener('resize', this.throttled, true);
+      window.removeEventListener('resize', this.throttled, true);
     }
   },
   shouldStick: function shouldStick() {
