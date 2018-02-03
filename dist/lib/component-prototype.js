@@ -1,9 +1,9 @@
-import throttle from 'lodash.throttle';
+import throttle from 'raf-throttle';
 
 export default {
     init() {
         this.getTriggerOffset();
-        this.throttled = throttle(this.check.bind(this), this.settings.throttle);
+        this.throttled = throttle(this.check.bind(this));
         
         document.addEventListener('scroll', this.throttled);
         window.addEventListener('resize', this.throttled);

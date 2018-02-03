@@ -58,7 +58,7 @@ This module depends upon Object.assign, element.classList, and Promises, availab
 ## Dependencies
 None external.
 
-Imports lodash.throttle.
+Imports raf-throttle.
 
 
 ## License
