@@ -1,13 +1,11 @@
 # Storm Sticky
 
-[![Build Status](https://travis-ci.org/mjbp/storm-sticky.svg?branch=master)](https://travis-ci.org/mjbp/storm-sticky)
-[![codecov.io](http://codecov.io/github/mjbp/storm-sticky/coverage.svg?branch=master)](http://codecov.io/github/mjbp/storm-sticky?branch=master)
 [![npm version](https://badge.fury.io/js/storm-sticky.svg)](https://badge.fury.io/js/storm-sticky)
 
 Sticky DOM elements - use with restraint and care to avoid jank.
 
 ## Example
-[https://mjbp.github.io/storm-sticky](https://mjbp.github.io/storm-sticky)
+[https://stormid.github.io/storm-sticky](https://stormid.github.io/storm-sticky)
 
 ## Usage
 ```
@@ -32,16 +30,16 @@ Load('/content/js/async/storm-sticky.standalone.js')
 ## Options
 ```
 {
-    offset: 0,
-    callback: null,
-    throttle: 16,
-    className: 'is--stuck'
+    offset: 0,//from the top of the screen
+    callback: false,//triggeed when stuck
+    extentDOMElement: false,//DOM node selector, the node's height will determine when the sticky element unsticks
+    className: 'is--stuck'//className for active 'stuck' state
 }
 ```
 e.g.
 ```
 Sticky.init('.js-sticky', {
-    callback() {}
+    extentDOMElement: '.corresponding-article'
 });
 ```
 
@@ -53,12 +51,12 @@ npm run test
 ## Browser support
 This is module has both es6 and es5 distributions. The es6 version should be used in a workflow that transpiles.
 
-This module depends upon Object.assign, element.classList, and Promises, available in all evergreen browsers. ie9+ is supported with polyfills, ie8+ will work with even more polyfills for Array functions and eventListeners.
+This module depends upon Object.assign and window.requestAnimationFrame available in all evergreen browsers. ie9+ is supported with polyfills, ie8+ will work with even more polyfills for Array functions and eventListeners.
 
 ## Dependencies
 None external.
 
-Imports raf-throttle.
+Imports raf-throttle
 
 
 ## License

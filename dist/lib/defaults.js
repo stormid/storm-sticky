@@ -1,6 +1,6 @@
 export default {
     offset: 0,
     callback: false,
-    unload: true,
+    extentDOMElement: false,
     className: 'is--stuck'
 };
