@@ -1,6 +1,10 @@
 /**
  * @name storm-sticky: Sticky DOM elements
+<<<<<<< Updated upstream
  * @version 0.1.0: Fri, 17 Mar 2017 15:54:40 GMT
+=======
+ * @version 1.2.1: Fri, 16 Mar 2018 12:20:52 GMT
+>>>>>>> Stashed changes
  * @author stormid
  * @license MIT
  */
@@ -21,8 +25,9 @@
    'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
+<<<<<<< Updated upstream
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -461,9 +466,60 @@ function toNumber(value) {
   var isBinary = reIsBinary.test(value);
   return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
 }
+=======
+var defaults = {
+    offset: 0,
+    callback: false,
+    unload: true,
+    className: 'is--stuck'
+};
+
+function unwrapExports(x) {
+    return x && x.__esModule ? x['default'] : x;
+}
+
+function createCommonjsModule(fn, module) {
+    return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var rafThrottle_1 = createCommonjsModule(function (module, exports) {
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    var rafThrottle = function rafThrottle(callback) {
+        var requestId = void 0;
+
+        var later = function later(context, args) {
+            return function () {
+                requestId = null;
+                callback.apply(context, args);
+            };
+        };
+
+        var throttled = function throttled() {
+            if (requestId === null || requestId === undefined) {
+                for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+                    args[_key] = arguments[_key];
+                }
+
+                requestId = requestAnimationFrame(later(this, args));
+            }
+        };
+
+        throttled.cancel = function () {
+            return cancelAnimationFrame(requestId);
+        };
+
+        return throttled;
+    };
+
+    exports.default = rafThrottle;
+});
+>>>>>>> Stashed changes
 
 var index = throttle;
 
+<<<<<<< Updated upstream
 var defaults = {
   offset: 0,
   callback: false,
@@ -498,31 +554,87 @@ var StormSticky = {
     if (!this.shouldStick()) {
       this.DOMElement.classList.contains(this.settings.className) && this.DOMElement.classList.remove(this.settings.className);
       return;
+=======
+var getNodePosition = function getNodePosition(node, offset) {
+    var location = 0;
+    if (node.offsetParent) {
+        do {
+            location += node.offsetTop;
+            node = node.offsetParent;
+        } while (node);
+    } else {
+        location = node.offsetTop;
+>>>>>>> Stashed changes
     }
-    this.DOMElement.classList.add(this.settings.className);
-    this.settings.callback && this.settings.callback.call(this);
+    return location - offset > 0 ? location - offset : 0;
+};
 
+<<<<<<< Updated upstream
     if (this.settings.unload) {
       document.removeEventListener('scroll', this.throttled, true);
       document.removeEventListener('resize', this.throttled, true);
+=======
+var componentPrototype = {
+    init: function init() {
+        this.getTriggerOffset();
+        this.throttledCheck = throttle(this.check.bind(this));
+        this.boundGetTriggerOffset = this.getTriggerOffset.bind(this);
+
+        document.addEventListener('scroll', this.throttledCheck);
+        window.addEventListener('resize', this.throttledCheck);
+        window.addEventListener('resize', this.boundGetTriggerOffset);
+        this.check();
+
+        return this;
+    },
+    getTriggerOffset: function getTriggerOffset() {
+        var cachedDisplayStyle = this.DOMElement.style.position;
+
+        this.DOMElement.style.position = 'static';
+        // this.triggerOffset = this.DOMElement.getBoundingClientRect().top + (document.body.scrollTop || ~~document.body.scrollTop) + this.settings.offset;
+        this.triggerOffset = getNodePosition(this.DOMElement, this.settings.offset);
+        this.DOMElement.style.position = cachedDisplayStyle;
+    },
+    check: function check() {
+        if (!this.shouldStick()) {
+            this.DOMElement.classList.contains(this.settings.className) && this.DOMElement.classList.remove(this.settings.className);
+            return;
+        }
+        this.DOMElement.classList.add(this.settings.className);
+        this.settings.callback && this.settings.callback.call(this);
+
+        if (this.settings.unload) {
+            document.removeEventListener('scroll', this.throttledCheck, true);
+            window.removeEventListener('resize', this.boundGetTriggerOffset);
+        }
+    },
+    shouldStick: function shouldStick() {
+        console.log(window.pageYOffset, this.triggerOffset);
+        return window.pageYOffset >= this.triggerOffset;
+>>>>>>> Stashed changes
     }
-  },
-  shouldStick: function shouldStick() {
-    return window.pageYOffset >= this.triggerOffset;
-  }
 };
 
 var init = function init(sel, opts) {
-  var els = [].slice.call(document.querySelectorAll(sel));
+    var els = [].slice.call(document.querySelectorAll(sel));
 
-  if (!els.length) throw new Error('Sticky cannot be initialised, no augmentable elements found');
+    if (!els.length) throw new Error('Sticky cannot be initialised, no augmentable elements found');
 
+<<<<<<< Updated upstream
   return els.map(function (el) {
     return Object.assign(Object.create(StormSticky), {
       DOMElement: el,
       settings: Object.assign({}, defaults, opts)
     }).init();
   });
+=======
+    return els.map(function (el) {
+        return Object.assign(Object.create(componentPrototype), {
+            DOMElement: el,
+            settings: Object.assign({}, defaults, opts)
+        }).init();
+    });
+>>>>>>> Stashed changes
 };
 
 var stormSticky = { init: init };
