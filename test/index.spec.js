@@ -1,5 +1,5 @@
 import should from 'should';
-import Sticky from '../dist/storm-sticky.standalone';
+import Sticky from '../dist';
 import 'jsdom-global/register';
 
 
@@ -28,17 +28,14 @@ describe('Initialisation', () => {
 	});
 
 	
-	it('should throw an error if no sticky elements are found', () => {
-		Sticky.init.bind(Sticky, '.js-err').should.throw();
-	});
-	
 	it('each array item should be an object with the correct properties', () => {
         StickyItem[0].should.have.property('settings').Object();
 		StickyItem[0].should.have.property('init').Function();
 		StickyItem[0].should.have.property('getTriggerOffset').Function();
 		StickyItem[0].should.have.property('check').Function();
 		StickyItem[0].should.have.property('shouldStick').Function();
-		StickyItem[0].should.have.property('throttled').Function();
+		StickyItem[0].should.have.property('throttledCheck').Function();
+		StickyItem[0].should.have.property('boundGetTriggerOffset').Function();
     
 	});
 

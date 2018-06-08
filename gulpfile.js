@@ -1,35 +1,32 @@
-/*global require*/
-/* Require the gulp and node packages */
-
 var gulp = require('gulp'),
-	plumber = require('gulp-plumber'),
-	pkg = require('./package.json'),
-	header = require('gulp-header'),
-	wrap = require('gulp-wrap-umd'),
-	notify = require('gulp-notify'),
-	uglify = require('gulp-uglify'),
-	rename = require('gulp-rename'),
-	babel = require('gulp-babel'),
-	browserify = require('browserify'),
-	source = require('vinyl-source-stream'),
-	buffer = require('vinyl-buffer'),
-	babelify = require( 'babelify'),
-	rollup = require('gulp-rollup'),
+    plumber = require('gulp-plumber'),
+    pkg = require('./package.json'),
+    header = require('gulp-header'),
+    wrap = require('gulp-wrap-umd'),
+    notify = require('gulp-notify'),
+    uglify = require('gulp-uglify'),
+    rename = require('gulp-rename'),
+    babel = require('gulp-babel'),
+    browserify = require('browserify'),
+    rollup = require('gulp-rollup'),
 	rollupNodeResolve = require('rollup-plugin-node-resolve'),
     commonjs = require('rollup-plugin-commonjs'),
-	browserSync = require('browser-sync'),
-	ghPages = require('gulp-gh-pages'),
-	runSequence = require('run-sequence'),
-	reload = browserSync.reload;
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
+    babelify = require( 'babelify'),
+    browserSync = require('browser-sync'),
+    ghPages = require('gulp-gh-pages'),
+    runSequence = require('run-sequence'),
+    reload = browserSync.reload;
 
 /* Set up the banner */
 var banner = [
-	'/**',
-	' * @name <%= pkg.name %>: <%= pkg.description %>',
-	' * @version <%= pkg.version %>: <%= new Date().toUTCString() %>',
-	' * @author <%= pkg.author %>',
-	' * @license <%= pkg.license %>',
-	' */\n'
+    '/**',
+    ' * @name <%= pkg.name %>: <%= pkg.description %>',
+    ' * @version <%= pkg.version %>: <%= new Date().toUTCString() %>',
+    ' * @author <%= pkg.author %>',
+    ' * @license <%= pkg.license %>',
+    ' */\n'
 ].join('\n');
 
 /* Wrapper to support es5 window and commonjs with same syntax */ 
@@ -52,14 +49,14 @@ var umdTemplate = ["(function(root, factory) {",
 
 /* Error notificaton*/
 var onError = function(err) {
-	notify.onError({
-		title:    'Gulp',
-		subtitle: 'Failure!',
-		message:  'Error: <%= error.message %>',
-		sound:    'Beep'
-	})(err);
+    notify.onError({
+        title:    "Gulp",
+        subtitle: "Failure!",
+        message:  "Error: <%= error.message %>",
+        sound:    "Beep"
+    })(err);
 
-	this.emit('end');
+    this.emit('end');
 };
 
 var componentName = function(){
@@ -91,8 +88,10 @@ gulp.task('js:es5-rollup', function() {
 	return gulp.src('src/index.js')
         .pipe(rollup({
 			allowRealFiles: true,
-            entry: 'src/index.js',
-			format: 'es',
+            input: 'src/index.js',
+            output: {
+                format: 'es'
+            },
 			plugins: [
 				rollupNodeResolve(),
                 commonjs()
@@ -116,7 +115,6 @@ gulp.task('js:es5-rollup', function() {
 gulp.task('js:es6', function() {
     gulp.src('src/*.js')
         .pipe(plumber({errorHandler: onError}))
-        .pipe(header(banner, {pkg : pkg}))
 		.pipe(gulp.dest('dist/'));
 
     return gulp.src('./src/lib/*.js')
@@ -148,8 +146,6 @@ gulp.task('example:async', function(){
 });
 gulp.task('example', ['example:import', 'example:async']);
 
-
-
 gulp.task('server', ['js', 'copy', 'example'], function() {
     browserSync({
         notify: false,
@@ -158,7 +154,7 @@ gulp.task('server', ['js', 'copy', 'example'], function() {
         tunnel: false
     });
 
-      gulp.watch(['src/*'], function(){
+      gulp.watch(['src/**/*'], function(){
           runSequence('js', 'copy', 'example', reload);
       });
       gulp.watch(['example/**/*'], ['example', reload]);
@@ -172,7 +168,7 @@ gulp.task('deploy', ['example'], function() {
 
 
 /************************
- *  Task collection API
+ *  Task API
  ************************/
 gulp.task('default', ['server']);
 gulp.task('serve', ['server']);
