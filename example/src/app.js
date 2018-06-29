@@ -4,7 +4,8 @@ const onDOMContentLoadedTasks = [() => {
 
 	Load('./js/storm-sticky.standalone.js')
 		.then(() => {
-			StormSticky.init('.js-sticky');
+			let Sticky = StormSticky.init('.js-sticky', { extent: '.js-scroll__extent' });
+			console.log(Sticky);
 		});
 }];
     

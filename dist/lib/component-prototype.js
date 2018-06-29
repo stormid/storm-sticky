@@ -41,14 +41,10 @@ export default {
         }
         this.DOMElement.classList.add(this.settings.className);
         this.settings.callback && this.settings.callback.call(this);
-        
-        if(this.settings.unload) {
-            document.removeEventListener('scroll', this.throttledCheck, true);
-            window.removeEventListener('resize', this.boundGetTriggerOffset);
-        }
+
     },
     shouldStick(){
-        console.log(window.pageYOffset, this.triggerOffset);
-        return window.pageYOffset >= this.triggerOffset;
+        let scrollY = window.pageYOffset;
+        return scrollY >= this.triggerOffset && (this.settings.extent ? scrollY <= this.triggerOffset + this.extentNode.offsetHeight : true);
     }
 };
