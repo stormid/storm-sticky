@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/stormid/storm-sticky/issues"
   },
-  "main": "dist/storm-sticky.js",
+  "main": "dist/index.js",
   "keywords": [
     "stormid",
     "ui",
